@@ -1,7 +1,7 @@
 clear;clc;
 //Datos de simulación
 t0          =   0
-tf          =   0.9
+tf          =   0.08
 paso        =   0.001
 ti          =   (t0:paso:tf)'                   //tiempo para simulación
 
@@ -16,8 +16,8 @@ B = [0; -1/(R1*R2*C1*C2)]
 C = [1 0]
 D = [0]
 H           =   [0]
-Q           =   [0.01 0; 0 0]
-R           =   0.005
+Q           =   [1.9 0; 0 0]
+R           =   0.1
 r_setpoint  =   [10  ; 0]
 
 k0          =   [0; 0; 0; 0; 0]
@@ -59,13 +59,13 @@ end
 //Gráficas
 figure(1)
 plot    (t,k(:,1),      t,k(:,2),   t,k(:,3),   t,k(:,4),   t,k(:,5)    )
-legend  ('$K_{11}$',    '$K_{12}$', '$K_{22}$', '$S_{1}$',  '$S_{2}$'   )
+legend  ('$K_{11}$',    '$K_{12}$', '$K_{22}$', '$S_{1}$',  '$S_{2}$', 3)
 xtitle  ('Solución a la Ec. de Riccati',"Tiempo t(s)",'$k(t), s(t)$'    )
 xgrid
 
 figure  (2)
 plot    (t,x(:,1),  t,x(:,2),   t,r_setpoint(1), '--'   )
-legend  ('$x_1$',   '$x_2$',    '$r_1(t)$'          )
+legend  ('$x_1$',   '$x_2$',    '$r_1(t)$'          , 4)
 xtitle  ('Estados del sistema','Tiempo t (s)','x(t)')
 xgrid
 
@@ -78,5 +78,3 @@ figure  (4)
 plot    (t, J_opt(1:$-1)                                )
 xtitle  ("Funcional de costo", "$t(s)$", "$J(t,x,u)$"   )
 xgrid
-
-

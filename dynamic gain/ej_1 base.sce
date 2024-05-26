@@ -1,19 +1,26 @@
 clear;clc;
 //Datos de simulación
-t0      =   0
-tf      =   1
-paso    =   0.01
-ti      =   (t0:paso:tf)'                   //tiempo para simulación
+t0          =   0
+tf          =   0.08
+paso        =   0.001
+ti          =   (t0:paso:tf)'                   //tiempo para simulación
 
-A       =   [0 1; 2 -1]
-B       =   [0  ; 1]
+R1 = 50E3
+R2 = 10E3
+R3 = 100E3
+C1 = 10E-6
+C2 = 50E-9
+
+A = [0 1; -1/(R2*R3*C1*C2) -(1/R1 + 1/R2 + 1/R3)*1/C1]
+B = [0; -1/(R1*R2*C1*C2)]
+
 H       =   [1 0; 0 0]
-Q       =   [1 0; 0 0]
-R       =   0.005
-r_set   =   [1; 0]
+Q       =   [1.9 0; 0 0]
+R       =   0.1
+r_set   =   [10; 0]
 
 k0      =   [H(1,1); 0; H(2,2); -H*r_set]
-x0      =   [10; -10]
+x0      =   [0; 0]
 
 //Ec de Riccati
 function dk=ecriccati(ti, k)
